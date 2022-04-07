@@ -148,4 +148,3 @@ cache/
 
 # png
 *.png
-!resources/*.png
