@@ -1,0 +1,39 @@
+repos:
+- repo: https://github.com/jorisroovers/gitlint
+  rev: v0.15.0
+  hooks:
+  - id: gitlint
+    args: [--contrib=CT1, --ignore=B6, --msg-filename]
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.3.0
+  hooks:
+  - id: end-of-file-fixer
+  - id: double-quote-string-fixer
+  - id: trailing-whitespace
+    exclude: ^tests/
+  - id: check-yaml
+    args: [--allow-multiple-documents]
+    files: \.(yaml|yml)
+  - id: double-quote-string-fixer
+- repo: https://github.com/google/yapf
+  rev: 503bc40d60dac91a484acb406358c492be7c59e7
+  hooks:
+    - id: yapf
+      name: yapf
+      language: python
+      entry: yapf
+      args: [-i, -vv]
+      types: [python]
+- repo: https://github.com/PyCQA/pylint
+  rev: pylint-2.6.2
+  hooks:
+  - id: pylint
+    name: pylint
+    entry: pylint
+    language: system
+    types: [python]
+- repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: 2.1.4
+  hooks:
+  - id: forbid-binary
+    exclude: resources/
