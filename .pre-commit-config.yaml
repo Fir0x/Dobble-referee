@@ -31,6 +31,7 @@ repos:
     name: pylint
     entry: pylint
     language: system
+    exclude: ^src/
     types: [python]
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
   rev: 2.1.4
