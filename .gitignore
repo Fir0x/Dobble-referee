@@ -148,3 +148,6 @@ cache/
 
 # png
 *.png
+
+# Training data
+resources
