@@ -124,11 +124,10 @@ if __name__ == "__main__":
                 im = imageio.imread(file_path)
                 X.append(im)
                 y.append(int(dir_name))
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y,random_state=RANDOM_STATE)
+    #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y,random_state=RANDOM_STATE)
 
-    color_histo_step = ("color histogram", Pipeline([("extraction", RGBSymbolExtractor()),
-                                                 ("histogram", ColorHistogram())]))
-    pipeline = Pipeline([("extractors", FeatureUnion([color_histo_step, ("hu moments", HuMoments())]), ("clf", RandomForestClassifier(random_state=RANDOM_STATE)))])
-    pipeline.fit(X_train, y_train)
+    color_histo_step = ("color histogram", Pipeline([("extraction", RGBSymbolExtractor()), ("histogram", ColorHistogram())]))
+    pipeline = Pipeline([("extractors", FeatureUnion([color_histo_step, ("hu moments", HuMoments())])), ("clf", RandomForestClassifier(random_state=RANDOM_STATE))])
+    pipeline.fit(X, y)
 
     joblib.dump(pipeline, "trained_pipeline.pkl")

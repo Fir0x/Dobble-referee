@@ -23,12 +23,14 @@ import cv2
 # import skimage
 import joblib
 
+from train import *
+
 class MyClassifier:
     """Sample classifier class to update.
     """
 
     def __init__(self) -> None:
-        self.pipeline = joblib.load("pipeline.pkl")
+        self.pipeline = joblib.load("trained_pipeline.pkl")
 
     def classify_image(self, image_path: str) -> int:
         """Classify the file for which the path is given,
@@ -44,7 +46,8 @@ class MyClassifier:
                  You may need to adjust your classifier outputs (typically 0-55).
         """
         image = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
-        return self.pipeline.predict(image)
+        print(image.shape)
+        return self.pipeline.predict([image])[0]
 
 
 def save_classifications(image_classes: Dict[str,int], output_path: str):
